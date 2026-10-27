@@ -6,7 +6,7 @@ dans un texte par les valeurs correspondantes dans un dico
 1. afficher le contenu entre la première occurence de (( et ))
 2. remplacer ((pression)) par 500 dans _template
 Hint: regarder la fonction str.replace
-3. itérer sur _template pour remplacer toutes les slots (())
+3. itérer sur _template pour remplacer tous les slots ((xxxx))
 par la clé correspondante si celle ci existe ou par N/A
 """
 
@@ -18,12 +18,19 @@ robinet.capacite=((capacite))
 """
 
 injections = {
-    "pression": "500",
-    "section": "30",
-    "debit": "2"
+    "pression": 500,
+    "section": 30,
+    "debit": 2
 }
 
-# %%
+# %% ---------------- trouver le contenu entre les 1ers occurences de (( et )) ----------------------
+
+start_index = _template.find("((") + 2
+end_index = _template.find("))")
+key = _template[start_index:end_index]
+
+_template.replace("((" + key + "))", str(injections[key]))
+
 
 
 # %% ----- portage de la cellule précédente en fonction ----------
