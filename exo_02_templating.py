@@ -31,7 +31,44 @@ key = _template[start_index:end_index]
 
 _template.replace("((" + key + "))", str(injections[key]))
 
+# %% ------------------- itération selon les lignes de la str -----------------
 
+lines = _template.splitlines()
+injected_lines = []
+for line in lines:
+    if line:
+        start_index = line.find("((") + 2
+        end_index = line.find("))")
+        key = line[start_index:end_index]
+
+        injected_lines.append(line.replace("((" + key + "))", str(injections.get(key, "N/A"))))
+print("\n".join(injected_lines))
+
+# %% ------------------ for : variation -----------------------------------------------
+lines = _template.splitlines()
+for i in range(len(lines)):
+    if lines[i]:
+        start_index = lines[i].find("((") + 2
+        end_index = lines[i].find("))")
+        key = lines[i][start_index:end_index]
+
+        lines[i] = lines[i].replace("((" + key + "))", str(injections.get(key, "N/A")))
+print("\n".join(lines))
+
+# %% ---------------------- for: dictionnaire -----------------------------------
+for key, value in injections.items():
+    _template = _template.replace("((" + key + "))", str(injections[key]))
+print(_template)
+
+# %% -------------------------- while: quelle est la condition de continuation/arrêt -----------
+
+while "((" in _template:
+    start_index = _template.find("((") + 2
+    end_index = _template.find("))")
+    key = _template[start_index:end_index]
+
+    _template = _template.replace("((" + key + "))", str(injections.get(key, "N/A")))
+_template
 
 # %% ----- portage de la cellule précédente en fonction ----------
 """
