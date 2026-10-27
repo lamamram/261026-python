@@ -14,4 +14,40 @@ que ces valeurs sont des entiers relatifs (1er cas entier naturel ensuite 2ème 
 5/ présenter le résultat avec 2 décimales
 """
 
+# %% ------------------------------- trouver la fonction pour convertir en int -------------------------------
+# TIP: regarder si la fonciton est globale ou interne à str
+
+s = ""
+s.isnumeric()
+# SI la str représente un entier naturel OU un entier négatif
+#                                           ( commence par - ET les reste est numérique)
+                                             # s[0] == "-"
+if s.isnumeric()                         or (s.startswith("-")     and s[1:].isnumeric()):
+    print("convertible en entier")
+
+# %% --------------------- saisie en clavier -----------------
+
+values = input("saisir n valeurs entiers relatifs séparés par ',':")
+values
+
+# %% ------------------------- itérer sur les valeurs -----------
+# TIP: pass est une instruction "bouche trou" qui ne fait rien pour éviter l'erreur de syntaxe
+# values = values.split(",")
+# for value in values:
+integers = []
+for value in values.split(","):
+    # nettoyer les espaces à gauche et à droite
+    value = value.strip()
+    if value.isnumeric() or (value.startswith("-") and value[1:].isnumeric()):
+        integers.append(int(value))
+
+integers
+# %% ----------------------------- calculer la moyenne à partir de la liste -----------
+# if len(integers) != 0:
+if integers:
+    # arrondi dans la valeur : round
+    avg = round(sum(integers) / len(integers), 2)
+    # .2f: uniquement formatage
+    print(f"moyenne de {integers}: {avg:.2f}")
+
 # %%
