@@ -78,6 +78,8 @@ technique
 3/ réféchir sur les paramètres d'entrée (positionnels / centraux, et optionnels => valeur par défaut) et de sortie
 4/ refactorer le code pour utiliser les paramètres d'entrée et construire la sortie
 5/ tester dans différents cas
+1. _template et injections
+2. "blabla {{param}}" et {"param": 100}
 """
 
 
