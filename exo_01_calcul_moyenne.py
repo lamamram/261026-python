@@ -40,14 +40,16 @@ for value in values.split(","):
     value = value.strip()
     if value.isnumeric() or (value.startswith("-") and value[1:].isnumeric()):
         integers.append(int(value))
+    else:
+        print(f"valeur {value} non convertible !")
 
-integers
-# %% ----------------------------- calculer la moyenne à partir de la liste -----------
+# ----------------------------- calculer la moyenne à partir de la liste -----------
 # if len(integers) != 0:
-if integers:
-    # arrondi dans la valeur : round
-    avg = round(sum(integers) / len(integers), 2)
-    # .2f: uniquement formatage
-    print(f"moyenne de {integers}: {avg:.2f}")
+else:
+    if integers:
+        # arrondi dans la valeur : round
+        avg = round(sum(integers) / len(integers), 2)
+        # .2f: uniquement formatage
+        print(f"moyenne de {integers}: {avg:.2f}")
 
 # %%
