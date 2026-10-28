@@ -18,6 +18,7 @@
 
 5. écrire le programme principal pour utiliser le package
 """
+# from ...          Cleaner
 
 
 if __name__ == "__main__":
@@ -40,8 +41,9 @@ Il est conçu pour optimiser la productivité des programmeurs en offrant des ou
 une syntaxe simple à utiliser. 
 """
 
-# tc.Cleaner()
-
+cleaner = Cleaner(text)
+clean_text = cleaner.clean()
+print(clean_text)
 ########### techniques d'associations possibles entre classes ###############
 ## 1. deux classes indédenpantes
 # avantages: maintenabilité et réutilisabilité max 0 couplage entre les 2
