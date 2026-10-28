@@ -2,11 +2,11 @@
 1. créer un package (dossier) "text_analyser"
 2. ajouter 2 modules "text_cleaner.py" et "word_counter.py"
 3. dans text_cleaner.py créer une classe "Cleaner"
-   - instancié avec un paramètre "text"
+   - instanciée avec un paramètre "text"
    - le texte est nettoyé des signes de ponctuation => string.punctuation
    - //                   des sauts de lignes (linux / windows)
    - //                   des mots de longueur inférieure ou égale à 3
-   proposition: 3 petites méthode privées __meth(self, ...)
+   proposition: 3 petites méthodes privées __meth(self, ...)
    - une méthode publique "clean" qui utilise les méthodes privés pour nettoyer susccessivement le text d'entrée 
      retourne le texte nettoyé en minuscule
 
@@ -20,7 +20,7 @@
 
 5. écrire le programme principal pour utiliser le package
 """
-# from ...          Cleaner
+from text_analyser.text_cleaner import Cleaner
 
 
 if __name__ == "__main__":
