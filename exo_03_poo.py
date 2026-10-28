@@ -21,6 +21,7 @@
 5. écrire le programme principal pour utiliser le package
 """
 from text_analyser.text_cleaner import Cleaner
+from text_analyser.word_counter import Counter
 
 
 if __name__ == "__main__":
@@ -43,9 +44,13 @@ Il est conçu pour optimiser la productivité des programmeurs en offrant des ou
 une syntaxe simple à utiliser. 
 """
 
-cleaner = Cleaner(text)
-clean_text = cleaner.clean()
-print(clean_text)
+# cleaner = Cleaner(text)
+# clean_text = cleaner.clean()
+# print(clean_text)
+
+counter = Counter(text)
+print(counter.get_occurences())
+
 ########### techniques d'associations possibles entre classes ###############
 ## 1. deux classes indédenpantes
 # avantages: maintenabilité et réutilisabilité max 0 couplage entre les 2
