@@ -6,7 +6,9 @@
    - le texte est nettoyé des signes de ponctuation => string.punctuation
    - //                   des sauts de lignes (linux / windows)
    - //                   des mots de longueur inférieure ou égale à 3
-   - une méthode publique "clean" retourne le texte nettoyé en minuscule
+   proposition: 3 petites méthode privées __meth(self, ...)
+   - une méthode publique "clean" qui utilise les méthodes privés pour nettoyer susccessivement le text d'entrée 
+     retourne le texte nettoyé en minuscule
 
 4. dans word_counter.py créer une classe "Counter"
    - instancié avec un paramètre "text"
