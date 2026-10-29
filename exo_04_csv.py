@@ -111,14 +111,54 @@ if not p_dns.exists():
 # %% ------------------ découper un gros csv ----------
 
 """
-- extraiez n=2 paquets de nb_line=100000 lignes de donnée, sans le header
-- ovrir le fichier et lire les lignes de csv
-- à chaque paquet de lignes <==> tous les multiples de 100k
+- BUT: extraire n=2 paquets de nb_line=100k lignes de donnée, sans le header
+1/ ouvrir le fichier et lire les lignes de csv
+2/ à chaque paquet de lignes <==> tous les multiples de 100k
     faire les opérations suivantes:
-     - créér un nouveau fichier csv à nommer en fct du nb de ligne
+     - créér un nouveau fichier csv à nommer en fct du n° de ligne
      - insérer le header dans ce nouveau fichier
      - écrire le paquet de 100k de lignes
 """
 
+nb_slice = 2
+slice_size = 10**5
+
+import csv
+
+def write_slice(i: int, header: list, data: list):
+   with open(p_data / f"dns_{i}.csv", mode="w", encoding="utf-8") as f:
+      writer = csv.writer(f, delimiter=";", lineterminator="\n")
+      writer.writerow(header)
+      writer.writerows(data)
+      # réaffectation dans une fonction ==> variable locale
+      # data = []
+      # opération muable => même id
+      data.clear()
 
 
+data = []
+with open(p_dns, mode="r", encoding="utf-8") as f:
+    reader = csv.reader(f, delimiter=";")
+    header = next(reader)
+    for i, line in enumerate(reader, start=1):
+      
+      if i > nb_slice * slice_size: break
+      
+      data.append(line)
+      # if not (i % slice_size):
+      
+      if i % slice_size: continue
+      
+      write_slice(i, header, data)
+
+
+
+
+       
+       
+    
+
+
+
+
+# %%
