@@ -20,9 +20,10 @@
 
 5. écrire le programme principal pour utiliser le package
 """
-from text_analyser.text_cleaner import Cleaner
-from text_analyser.word_counter import Counter
-
+# from text_analyser.text_cleaner import Cleaner
+# from text_analyser.word_counter import Counter
+# astuce du __init__.py
+from text_analyser import Counter
 
 if __name__ == "__main__":
   text = """

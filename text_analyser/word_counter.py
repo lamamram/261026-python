@@ -1,7 +1,7 @@
 # from text_cleaner import Cleaner # ERROR
 
 # REGLE D'OR IMPORTS inter package
-# les imports sont toujours calculés depuis le programme principale !!!
+# les imports sont toujours calculés depuis le programme principal !!!
 
 from text_analyser.text_cleaner import Cleaner
 
@@ -25,6 +25,10 @@ class Counter:
             else:
                 occurences[word] = 1
 
+        # REM: trier un dictionnaire, en tant qu'itérable => trier la liste des clés
+        # REM: on doit tier la liste de tuple ==> .items()
+        # REM: trier un tuple par défaut ==> trie sur le premier élément [0] par défaut
+        # REM: on a besoin de changer la fonction de tri pour trier sur [1]
         occurences = sorted(occurences.items(), key=lambda tup: tup[1], reverse=True)
 
         return dict(occurences[:5])
