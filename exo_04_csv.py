@@ -55,3 +55,23 @@ Réponse HTTP
 - entête de réponse: infos sur le serveur
 - le corps de la réponse (html, fichier sous forme de flux d'octets, json ... )
 """
+# %%
+
+import requests
+
+
+url = "https://www.afnic.fr/wp-media/ftp/documentsOpenData/202503_OPENDATA_A-NomsDeDomaineEnPointFr.zip"
+archive_name = url.split("/")[-1]
+
+try:
+   r = requests.get(url)
+
+   # 1. vérifier le code de statut et 2. observer l'entête Content-Type
+   if 200 <= r.status_code < 300 and "application/zip" in r.headers["content-type"]:
+      # prendre le format de corps de réponse (.json() ou .text (HTML) ou .content (bytes))
+      with open(f"./{archive_name}", mode="wb") as f:
+         f.write(r.content)
+   else:
+      raise ValueError(f"pb: status: {r.status_code}, headers: {r.headers["content-type"]}")
+except (requests.ConnectionError, requests.HTTPError, ValueError) as e:
+   print(e)
