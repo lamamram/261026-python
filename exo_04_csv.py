@@ -108,7 +108,17 @@ if not p_dns.exists():
       z.extract(csv_name)
    os.rename(f"./{csv_name}", p_dns)
 
-# %% ------------------ création de dossier & renommage/déplacement ----------
+# %% ------------------ découper un gros csv ----------
+
+"""
+- extraiez n=2 paquets de nb_line=100000 lignes de donnée, sans le header
+- ovrir le fichier et lire les lignes de csv
+- à chaque paquet de lignes <==> tous les multiples de 100k
+    faire les opérations suivantes:
+     - créér un nouveau fichier csv à nommer en fct du nb de ligne
+     - insérer le header dans ce nouveau fichier
+     - écrire le paquet de 100k de lignes
+"""
 
 
 
