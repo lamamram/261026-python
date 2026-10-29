@@ -1,0 +1,16 @@
+[
+    {
+        "firstname": "Joe",
+        "lastname": "Doe",
+        "age": 22,
+        "height": 1.75,
+        "comment": "blablab ... ; blabliblo"
+    },
+    {
+        "firstname": "Jane",
+        "lastname": "Austen",
+        "age": 34,
+        "height": 1.79,
+        "comment": "blàblà"
+    }
+]
