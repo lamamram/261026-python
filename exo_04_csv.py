@@ -6,8 +6,9 @@ outils: pip install requests
 1. téléchargement en GET et en binaire
 
 2. extraire le fichier .csv contenu dans le zip à télécharger
-hint: zipfile.Zipfile (doc ou google/stackoverflow)
+hint: zipfile.ZipFile (doc ou google/stackoverflow)
 hint: les zip s'ouvrent et se ferment
+hint: pour extraire une pièce individuelle dans le zip => .namelist()
 
 3. déplacer le fichier csv en dans data/dns.csv
 4.. ne faire ce qui précède qui si ce n'est pas déjà fait
@@ -58,20 +59,56 @@ Réponse HTTP
 # %%
 
 import requests
-
+import os
+from pathlib import Path
 
 url = "https://www.afnic.fr/wp-media/ftp/documentsOpenData/202503_OPENDATA_A-NomsDeDomaineEnPointFr.zip"
 archive_name = url.split("/")[-1]
+p_archive = Path(archive_name)
 
-try:
-   r = requests.get(url)
+# if not os.path.exists(f"./{archive_name}"):
+if not p_archive.exists():
+   try:
+      r = requests.get(url)
 
-   # 1. vérifier le code de statut et 2. observer l'entête Content-Type
-   if 200 <= r.status_code < 300 and "application/zip" in r.headers["content-type"]:
-      # prendre le format de corps de réponse (.json() ou .text (HTML) ou .content (bytes))
-      with open(f"./{archive_name}", mode="wb") as f:
-         f.write(r.content)
-   else:
-      raise ValueError(f"pb: status: {r.status_code}, headers: {r.headers["content-type"]}")
-except (requests.ConnectionError, requests.HTTPError, ValueError) as e:
-   print(e)
+      # 1. vérifier le code de statut et 2. observer l'entête Content-Type
+      if 200 <= r.status_code < 300 and "application/zip" in r.headers["content-type"]:
+         # prendre le format de corps de réponse (.json() ou .text (HTML) ou .content (bytes))
+         with open(f"./{archive_name}", mode="wb") as f:
+            f.write(r.content)
+      else:
+         raise ValueError(f"pb: status: {r.status_code}, headers: {r.headers["content-type"]}")
+   except (requests.ConnectionError, requests.HTTPError, ValueError) as e:
+      print(e)
+
+# %% ---------------------- décompresser le zip avec le module zipfile et sa classe ZipFile ------------------
+
+from zipfile import ZipFile
+from datetime import datetime
+
+p_data = Path("./data")
+
+# if not os.path.exists("./data"):
+if not p_data.exists():
+   os.mkdir(p_data)
+
+# surcharge de l'opérateur / pour composer des chemins
+p_dns = p_data / "dns.csv"
+
+## usages du path
+# print(p_dns, p_dns.absolute())
+# print(p_dns.parent, p_dns.stem)
+# meta = p_dns.lstat()
+# print(datetime.fromtimestamp(meta.st_mtime))
+
+# if not os.path.exists("./data/dns.csv"):
+if not p_dns.exists():
+   with ZipFile(f"./{archive_name}", mode="r") as z:
+      csv_name = z.namelist()[0]
+      z.extract(csv_name)
+   os.rename(f"./{csv_name}", p_dns)
+
+# %% ------------------ création de dossier & renommage/déplacement ----------
+
+
+
