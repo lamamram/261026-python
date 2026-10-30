@@ -44,7 +44,7 @@ start pyside6-designer
   + `SpinBox`: `maximum: 10` dans `QSpinBox` à droite
   + `SpinBox`: `value: 3` dans `QSpinBox` à droite
 
-* sauvegarder: `Ctrl + s` analyzer.ui dans le dossier gui
+* sauvegarder: `Ctrl + s` gui_analyser.ui dans le dossier gui
 
 ## générer le layout
 
