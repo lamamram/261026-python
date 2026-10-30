@@ -9,9 +9,9 @@ from text_analyser.text_cleaner import Cleaner
 # from .text_cleaner import Cleaner
 
 class Counter:
-    def __init__(self, text: str):
+    def __init__(self, text: str, min_len: int=3):
         # couplage fort ou composition(UML)
-        self.text = Cleaner(text).clean()
+        self.text = Cleaner(text).clean(min_len=min_len)
 
     def get_occurences(self) -> dict:
 

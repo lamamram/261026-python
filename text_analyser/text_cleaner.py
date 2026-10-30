@@ -17,9 +17,9 @@ class Cleaner:
     def __clean_spaces(self):
         self.text = re.sub(" +", " ", self.text)
 
-    def __little_words(self):
+    def __little_words(self, min_len: int):
         self.text = " ".join(
-            filter(lambda w: len(w) > 3, 
+            filter(lambda w: len(w) > min_len, 
             self.text.split()
         ))
         # words = []
@@ -28,10 +28,10 @@ class Cleaner:
         #         words.append(word)
         # self.text = " ".join(words)
 
-    def clean(self) -> str:
+    def clean(self, min_len: int=3) -> str:
         self.__clean_punctuation()
         self.__clean_crlf()
         self.__clean_spaces()
-        self.__little_words()
+        self.__little_words(min_len)
 
         return self.text.lower()

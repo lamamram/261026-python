@@ -24,8 +24,11 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         1/ décorer la méthode avec Sllot()
         2/ nommer la méthode selon on_<widget_name>_<event_name>
         """
+        self.listWidget.clear()
+
         text = self.textEdit.toPlainText()
-        counter = Counter(text)
+        min_len = self.signWords.value()
+        counter = Counter(text,min_len=min_len)
         for k, v in counter.get_occurences().items():
             self.listWidget.addItem(f"{k}: {v}")
        
